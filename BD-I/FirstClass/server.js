@@ -2,6 +2,8 @@
 // Server instantiate
 const express = require('express');
 const app = express();
+const bodyParser = require('body-parser')
+app.use(bodyParser.json());
 app.listen(3000, () => {
     // stablis port number
     console.log("Server is started at 3000 port number");
@@ -18,3 +20,8 @@ app.post('/api/cars',(req,res)=>{
     console.log(brand);
     res.send("Cars summited succesfully");
 })
+
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/myDbConnect')
+.then(() => { console.log("Connection successful"); })
+.catch((error) => console.log("Error: ", error));
