@@ -1,5 +1,5 @@
 //import the model
-const { responsess_s} = require("express");
+
 const Todo = require("../models/Todo.js");
 
 //define rourte handler
