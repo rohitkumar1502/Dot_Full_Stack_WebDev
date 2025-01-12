@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const {auth, isStudent, isAdmin} = require("../middlewares/authVerify");
-
 const {signin, signup} = require('../controllers/auth');
+const User = require('../models/userSchema');
 
 router.post('/login', signin);
 router.post('/signup', signup);
@@ -27,6 +27,29 @@ router.get('/admin', auth, isAdmin, (req, res)=>{
         success: true,
         message: "Welcome to protected route for admine"
     })
+})
+
+router.get('/getemail', auth, async (req, res) => {
+    try{
+        const id = req.user.id;
+        console.log("ID: ", id);
+
+        const user = await User.findById(id);
+
+        res.status(200).json({
+            user: user,
+            id: id,
+            message:"By id we found user details",
+            success:true
+        })
+
+    }catch(err){
+        res.status(500).json({
+            message:"Email Not found",
+            success: false
+        })
+    }
+
 })
 
 module.exports = router;

@@ -80,6 +80,7 @@ exports.signin = async (req, res) => {
       user.password = undefined;
 
       const options = {
+        // expires: new Date(Date.now() + 1000),
         expires: new Date(Date.now() + 3 * 24 * 60 * 60 *1000),
         httpOnly: true
       }
